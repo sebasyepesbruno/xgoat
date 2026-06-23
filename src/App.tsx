@@ -16,7 +16,7 @@ const ODDS_API_KEY     = "2b8e66079f23dff56c1fcf7be2820a49";
   "Argentina":"J","Algeria":"J","Austria":"J","Jordan":"J",
   "Portugal":"K","DR Congo":"K","Uzbekistan":"K","Colombia":"K",
   "Ghana":"L","Panama":"L","England":"L","Croatia":"L",
-};
+};*/
 
 const NOMBRES_ES: Record<string, string> = {
   "Mexico":"México","South Africa":"Sudáfrica","South Korea":"Corea del Sur",
@@ -36,7 +36,7 @@ const NOMBRES_ES: Record<string, string> = {
   "Portugal":"Portugal","DR Congo":"RD Congo","Uzbekistan":"Uzbekistán",
   "Colombia":"Colombia","Ghana":"Ghana","Panama":"Panamá",
   "England":"Inglaterra","Croatia":"Croacia",
-};*/
+};
 
 function horaCol(utcDate: string) {
   const dt = new Date(utcDate);
