@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 const ODDS_API_KEY     = "2b8e66079f23dff56c1fcf7be2820a49";
 
 
-const _GRUPOS: Record<string, string> = {
+/*const _GRUPOS: Record<string, string> = {
   "Mexico":"A","South Africa":"A","South Korea":"A","Czechia":"A",
   "Canada":"B","Bosnia-Herzegovina":"B","Qatar":"B","Switzerland":"B",
   "United States":"C","Paraguay":"C","Australia":"C","Turkey":"C",
@@ -36,7 +36,7 @@ const NOMBRES_ES: Record<string, string> = {
   "Portugal":"Portugal","DR Congo":"RD Congo","Uzbekistan":"Uzbekistán",
   "Colombia":"Colombia","Ghana":"Ghana","Panama":"Panamá",
   "England":"Inglaterra","Croatia":"Croacia",
-};
+};*/
 
 function horaCol(utcDate: string) {
   const dt = new Date(utcDate);
