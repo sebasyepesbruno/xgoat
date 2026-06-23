@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
 const ODDS_API_KEY     = "2b8e66079f23dff56c1fcf7be2820a49";
-const FOOTBALL_API_KEY = "ee664521fa4c4600aa814ecb602ddf88";
 
-const GRUPOS: Record<string, string> = {
+
+const _GRUPOS: Record<string, string> = {
   "Mexico":"A","South Africa":"A","South Korea":"A","Czechia":"A",
   "Canada":"B","Bosnia-Herzegovina":"B","Qatar":"B","Switzerland":"B",
   "United States":"C","Paraguay":"C","Australia":"C","Turkey":"C",
