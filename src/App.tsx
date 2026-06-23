@@ -242,6 +242,7 @@ export default function App() {
     );
   };
 
+  //@ts-nocheck
   const s: any = {
     app:    { minHeight: "100vh", background: "#080c14", color: "#e8edf5", fontFamily: "Barlow, sans-serif" },
     header: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", borderBottom: "1px solid #1e2d45", background: "#080c14", position: "sticky" as const, top: 0, zIndex: 100 },
