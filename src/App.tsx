@@ -396,11 +396,59 @@ export default function App() {
             )}
 
             {/* BUSQUEDA */}
-            {busqueda.length > 1 && (
-              <div style={{ marginTop: 10 }}>
-                {filtrar(partidos).map(p => renderPartido(p))}
-              </div>
-            )}
+            {busqueda.length > 1 ? (
+  <div>
+    {filtrar(partidos).length > 0 ? (
+      filtrar(partidos).map(p => renderPartido(p))
+    ) : (
+      <div
+        style={{
+          textAlign: "center",
+          padding: 40,
+          color: "#5a6a80",
+        }}
+      >
+        No se encontraron equipos
+      </div>
+    )}
+  </div>
+) : (
+  <>
+    {/* HOY */}
+    {tab === "hoy" && (
+      deHoy.length > 0
+        ? deHoy.map(p => renderPartido(p))
+        : (
+          <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
+            No hay partidos hoy
+          </div>
+        )
+    )}
+
+    {/* PROXIMOS */}
+    {tab === "proximos" && (
+      Object.keys(porFecha).sort().map(fecha => (
+        // tu código actual
+      ))
+    )}
+
+    {/* RESULTADOS */}
+    {tab === "resultados" && (
+      [...jugados].reverse().map(p => renderPartido(p))
+    )}
+
+    {/* FAVORITOS */}
+    {tab === "favoritos" && (
+      favList.length > 0
+        ? favList.map(p => renderPartido(p))
+        : (
+          <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
+            No tienes favoritos aún
+          </div>
+        )
+    )}
+  </>
+)}
           </>
         )}
       </div>
