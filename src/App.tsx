@@ -285,24 +285,30 @@ export default function App() {
         </div>
       </div>
 
-      {/* BUSCADOR */}
-      <div style={s.search}>
-        <div style={{ position: "relative" }}>
-          <span style={{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", color: "#5a6a80" }}>🔍</span>
-          <input
-            style={s.input}
-            placeholder="Buscar... ej: Colombia, Brasil, Argentina"
-            value={busqueda}
-            onChange={e => setBusqueda(e.target.value)}
-          />
-        </div>
-        {busqueda.length > 1 && (
-          <div style={{ marginTop: 8, fontSize: 12, color: "#5a6a80" }}>
-            {filtrar(partidos).length} resultado(s) para "{busqueda}"
-            <button onClick={() => setBusqueda("")} style={{ marginLeft: 10, background: "none", border: "none", color: "#00e5ff", cursor: "pointer", fontSize: 12 }}>Limpiar</button>
-          </div>
-        )}
+{/* BUSQUEDA */}
+{busqueda.length > 1 && (
+  <div style={{ marginTop: 10 }}>
+    <div style={{
+      marginBottom: 12,
+      fontSize: 12,
+      color: "#5a6a80"
+    }}>
+      Resultados encontrados: {filtrar(partidos).length}
+    </div>
+
+    {filtrar(partidos).length > 0 ? (
+      filtrar(partidos).map(p => renderPartido(p))
+    ) : (
+      <div style={{
+        textAlign: "center",
+        padding: 40,
+        color: "#5a6a80"
+      }}>
+        No se encontraron equipos
       </div>
+    )}
+  </div>
+)}
 
       {/* STATS */}
       <div style={s.stats}>
@@ -344,7 +350,7 @@ export default function App() {
         ) : (
           <>
             {/* HOY */}
-            {tab === "hoy" && (
+            {busqueda.length < 2 && tab === "hoy" && (
               deHoy.length > 0 ? deHoy.map(p => renderPartido(p))
               : <div style={{ textAlign: "center" as const, padding: 40, color: "#5a6a80" }}>
                   <div style={{ fontSize: 32, marginBottom: 8 }}>📅</div>
@@ -354,7 +360,7 @@ export default function App() {
             )}
 
             {/* PROXIMOS */}
-            {tab === "proximos" && Object.keys(porFecha).sort().map(fecha => (
+            {busqueda.length < 2 && tab === "proximos" && Object.keys(porFecha).sort().map(fecha => (
               <div key={fecha} style={{ marginBottom: 8 }}>
                 <button onClick={() => toggleFecha(fecha)} style={{
                   width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -381,12 +387,12 @@ export default function App() {
             ))}
 
             {/* RESULTADOS */}
-            {tab === "resultados" && (
+            {busqueda.length < 2 && tab === "resultados" && (
               [...jugados].reverse().map(p => renderPartido(p))
             )}
 
             {/* FAVORITOS */}
-            {tab === "favoritos" && (
+            {busqueda.length < 2 && tab === "favoritos" && (
               favList.length > 0 ? favList.map(p => renderPartido(p))
               : <div style={{ textAlign: "center" as const, padding: 40, color: "#5a6a80" }}>
                   <div style={{ fontSize: 32, marginBottom: 8 }}>★</div>
