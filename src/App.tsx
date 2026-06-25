@@ -398,26 +398,19 @@ export default function App() {
             {/* BUSQUEDA */}
             {busqueda.length > 1 && (
               <div style={{ marginTop: 10 }}>
-                <div style={{
-                  marginBottom: 12,
-                  fontSize: 12,
-                  color: "#5a6a80"
-                }}>
-                  Resultados encontrados: {filtrar(partidos).length}
-                </div>
+                <h3>Resultados: {filtrar(partidos).length}</h3>
 
-                {filtrar(partidos).length > 0 ? (
-                  filtrar(partidos).map(p => renderPartido(p))
-                ) : (
-                  <div style={{
-                    textAlign: "center",
-                    padding: 40,
-                    color: "#5a6a80"
+                {filtrar(partidos).map((p, i) => (
+                  <div key={i} style={{
+                    padding: 10,
+                    marginBottom: 10,
+                    border: "1px solid #1e2d45"
                   }}>
-                    No se encontraron equipos
+                    {p.local} vs {p.visitante}
                   </div>
-                )}
+                ))}
               </div>
+            )}              </div>
             )}
           </>
         )}
