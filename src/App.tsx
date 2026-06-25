@@ -397,35 +397,10 @@ export default function App() {
 
             {/* BUSQUEDA */}
             {busqueda.length > 1 && (
-  <div style={{ marginTop: 10 }}>
-    {filtrar(partidos).map(p => renderPartido(p))}
-  </div>
-)}
-
-    {/* PROXIMOS */}
-    {tab === "proximos" && (
-      Object.keys(porFecha).sort().map(fecha => (
-        // tu código actual
-      ))
-    )}
-
-    {/* RESULTADOS */}
-    {tab === "resultados" && (
-      [...jugados].reverse().map(p => renderPartido(p))
-    )}
-
-    {/* FAVORITOS */}
-    {tab === "favoritos" && (
-      favList.length > 0
-        ? favList.map(p => renderPartido(p))
-        : (
-          <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
-            No tienes favoritos aún
-          </div>
-        )
-    )}
-  </>
-)}
+              <div style={{ marginTop: 10 }}>
+                {filtrar(partidos).map(p => renderPartido(p))}
+              </div>
+            )}
           </>
         )}
       </div>
