@@ -333,117 +333,117 @@ export default function App() {
         ) : (
           <>
             {/* HOY */}
-{tab === "hoy" && busqueda.length < 2 && (
-  deHoy.length > 0 ? deHoy.map(p => renderPartido(p))
-  : <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
-      <div style={{ fontSize: 32, marginBottom: 8 }}>📅</div>
-      <div>No hay partidos hoy</div>
-      <div style={{ fontSize: 12, marginTop: 4 }}>{formatearFecha(hoy)}</div>
-    </div>
-)}
+            {tab === "hoy" && busqueda.length < 2 && (
+              deHoy.length > 0 ? deHoy.map(p => renderPartido(p))
+              : <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
+                  <div style={{ fontSize: 32, marginBottom: 8 }}>📅</div>
+                  <div>No hay partidos hoy</div>
+                  <div style={{ fontSize: 12, marginTop: 4 }}>{formatearFecha(hoy)}</div>
+                </div>
+            )}
 
-{/* PROXIMOS */}
-{tab === "proximos" && busqueda.length < 2 && Object.keys(porFecha).sort().map(fecha => (
-  <div key={fecha} style={{ marginBottom: 8 }}>
-    <button onClick={() => toggleFecha(fecha)} style={{
-      width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
-      background: "#0d1320", border: "1px solid #1e2d45",
-      borderRadius: fechasAbiertas[fecha] ? "8px 8px 0 0" : "8px",
-      padding: "10px 14px", cursor: "pointer", color: "#e8edf5"
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <span style={{ fontFamily: "Barlow Condensed", fontSize: 15, fontWeight: 800, textTransform: "uppercase" }}>
-          {formatearFecha(fecha)}
-        </span>
-        <span style={{ fontSize: 11, color: "#5a6a80" }}>{porFecha[fecha].length} partido(s)</span>
-      </div>
-      <span style={{ color: "#00e5ff", fontSize: 14, fontWeight: 700 }}>
-        {fechasAbiertas[fecha] ? "▲" : "▼"}
-      </span>
-    </button>
-    {fechasAbiertas[fecha] && (
-      <div style={{ border: "1px solid #1e2d45", borderTop: "none", borderRadius: "0 0 8px 8px", overflow: "hidden" }}>
-        {porFecha[fecha].map(p => renderPartido(p, true))}
-      </div>
-    )}
-  </div>
-))}
+            {/* PROXIMOS */}
+            {tab === "proximos" && busqueda.length < 2 && Object.keys(porFecha).sort().map(fecha => (
+              <div key={fecha} style={{ marginBottom: 8 }}>
+                <button onClick={() => toggleFecha(fecha)} style={{
+                  width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+                  background: "#0d1320", border: "1px solid #1e2d45",
+                  borderRadius: fechasAbiertas[fecha] ? "8px 8px 0 0" : "8px",
+                  padding: "10px 14px", cursor: "pointer", color: "#e8edf5"
+                }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <span style={{ fontFamily: "Barlow Condensed", fontSize: 15, fontWeight: 800, textTransform: "uppercase" }}>
+                      {formatearFecha(fecha)}
+                    </span>
+                    <span style={{ fontSize: 11, color: "#5a6a80" }}>{porFecha[fecha].length} partido(s)</span>
+                  </div>
+                  <span style={{ color: "#00e5ff", fontSize: 14, fontWeight: 700 }}>
+                    {fechasAbiertas[fecha] ? "▲" : "▼"}
+                  </span>
+                </button>
+                {fechasAbiertas[fecha] && (
+                  <div style={{ border: "1px solid #1e2d45", borderTop: "none", borderRadius: "0 0 8px 8px", overflow: "hidden" }}>
+                    {porFecha[fecha].map(p => renderPartido(p, true))}
+                  </div>
+                )}
+              </div>
+            ))}
 
-{/* RESULTADOS */}
-{tab === "resultados" && busqueda.length < 2 && (
-  [...jugados].reverse().map(p => renderPartido(p))
-)}
+            {/* RESULTADOS */}
+            {tab === "resultados" && busqueda.length < 2 && (
+              [...jugados].reverse().map(p => renderPartido(p))
+            )}
 
-{/* GOLEADORES */}
-{tab === "goleadores" && busqueda.length < 2 && (
-  <div>
-    <div style={{ fontSize: 11, color: "#5a6a80", letterSpacing: 2, textTransform: "uppercase", marginBottom: 12 }}>
-      Top goleadores del Mundial 2026
-    </div>
-    {goleadores.map((g, i) => (
-      <div key={i} style={{ background: "#0d1320", border: "1px solid #1e2d45", borderRadius: 8, padding: "14px 16px", marginBottom: 8 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontFamily: "Barlow Condensed", fontSize: 22, fontWeight: 800, color: i === 0 ? "#ffe600" : i === 1 ? "#c0c0c0" : i === 2 ? "#cd7f32" : "#5a6a80", minWidth: 36, textAlign: "center" }}>
-            #{i+1}
-          </span>
-          <span style={{ fontSize: 28 }}>{BANDERAS[g.equipo] || "🏳"}</span>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontFamily: "Barlow Condensed", fontSize: 17, fontWeight: 700 }}>{g.nombre}</div>
-            <div style={{ fontSize: 11, color: "#5a6a80", marginTop: 2 }}>{g.equipo}</div>
-            <div style={{ display: "flex", gap: 10, marginTop: 6 }}>
-              <span style={{ fontSize: 10, color: "#5a6a80", background: "#111928", padding: "2px 8px", borderRadius: 3 }}>
-                {g.partidos} partidos jugados
-              </span>
-            </div>
-          </div>
-          <div style={{ textAlign: "right" }}>
-            <div style={{ fontFamily: "Barlow Condensed", fontSize: 26, fontWeight: 800, color: "#ff4d6d" }}>
-              {g.goles} ⚽
-            </div>
-            {g.asistencias > 0 && (
-              <div style={{ fontSize: 12, color: "#00e5ff", fontWeight: 700, marginTop: 2 }}>
-                {g.asistencias} asistencias
+            {/* GOLEADORES */}
+            {tab === "goleadores" && busqueda.length < 2 && (
+              <div>
+                <div style={{ fontSize: 11, color: "#5a6a80", letterSpacing: 2, textTransform: "uppercase", marginBottom: 12 }}>
+                  Top goleadores del Mundial 2026
+                </div>
+                {goleadores.map((g, i) => (
+                  <div key={i} style={{ background: "#0d1320", border: "1px solid #1e2d45", borderRadius: 8, padding: "14px 16px", marginBottom: 8 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <span style={{ fontFamily: "Barlow Condensed", fontSize: 22, fontWeight: 800, color: i === 0 ? "#ffe600" : i === 1 ? "#c0c0c0" : i === 2 ? "#cd7f32" : "#5a6a80", minWidth: 36, textAlign: "center" }}>
+                        #{i+1}
+                      </span>
+                      <span style={{ fontSize: 28 }}>{BANDERAS[g.equipo] || "🏳"}</span>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontFamily: "Barlow Condensed", fontSize: 17, fontWeight: 700 }}>{g.nombre}</div>
+                        <div style={{ fontSize: 11, color: "#5a6a80", marginTop: 2 }}>{g.equipo}</div>
+                        <div style={{ display: "flex", gap: 10, marginTop: 6 }}>
+                          <span style={{ fontSize: 10, color: "#5a6a80", background: "#111928", padding: "2px 8px", borderRadius: 3 }}>
+                            {g.partidos} partidos jugados
+                          </span>
+                        </div>
+                      </div>
+                      <div style={{ textAlign: "right" }}>
+                        <div style={{ fontFamily: "Barlow Condensed", fontSize: 26, fontWeight: 800, color: "#ff4d6d" }}>
+                          {g.goles} ⚽
+                        </div>
+                        {g.asistencias > 0 && (
+                          <div style={{ fontSize: 12, color: "#00e5ff", fontWeight: 700, marginTop: 2 }}>
+                            {g.asistencias} asistencias
+                          </div>
+                        )}
+                        {g.asistencias === 0 && (
+                          <div style={{ fontSize: 11, color: "#3a4a5a", marginTop: 2 }}>0 asistencias</div>
+                        )}
+                      </div>
+                    </div>
+                    <div style={{ marginTop: 10 }}>
+                      <div style={{ height: 4, background: "#1e2d45", borderRadius: 2 }}>
+                        <div style={{ height: "100%", width: String(Math.round(g.goles / goleadores[0].goles * 100)) + "%", background: i === 0 ? "#ffe600" : i < 3 ? "#ff4d6d" : "#00e5ff", borderRadius: 2 }} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
-            {g.asistencias === 0 && (
-              <div style={{ fontSize: 11, color: "#3a4a5a", marginTop: 2 }}>0 asistencias</div>
+
+            {/* FAVORITOS */}
+            {tab === "favoritos" && busqueda.length < 2 && (
+              favList.length > 0 ? favList.map(p => renderPartido(p))
+              : <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
+                  <div style={{ fontSize: 32, marginBottom: 8 }}>★</div>
+                  <div>No tienes favoritos aun</div>
+                  <div style={{ fontSize: 12, marginTop: 4 }}>Toca FAV en cualquier partido</div>
+                </div>
             )}
-          </div>
-        </div>
-        <div style={{ marginTop: 10 }}>
-          <div style={{ height: 4, background: "#1e2d45", borderRadius: 2 }}>
-            <div style={{ height: "100%", width: String(Math.round(g.goles / goleadores[0].goles * 100)) + "%", background: i === 0 ? "#ffe600" : i < 3 ? "#ff4d6d" : "#00e5ff", borderRadius: 2 }} />
-          </div>
-        </div>
-      </div>
-    ))}
-  </div>
-)}
 
-{/* FAVORITOS */}
-{tab === "favoritos" && busqueda.length < 2 && (
-  favList.length > 0 ? favList.map(p => renderPartido(p))
-  : <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
-      <div style={{ fontSize: 32, marginBottom: 8 }}>★</div>
-      <div>No tienes favoritos aun</div>
-      <div style={{ fontSize: 12, marginTop: 4 }}>Toca FAV en cualquier partido</div>
-    </div>
-)}
-
-{/* BUSQUEDA — siempre visible cuando hay texto */}
-{busqueda.length > 1 && (
-  <div>
-    <div style={{ fontSize: 11, color: "#5a6a80", letterSpacing: 2, textTransform: "uppercase", marginBottom: 12 }}>
-      {filtrar(partidos).length} resultado(s) para "{busqueda}"
-    </div>
-    {filtrar(partidos).length === 0 ? (
-      <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
-        <div style={{ fontSize: 32, marginBottom: 8 }}>🔍</div>
-        <div>No se encontraron partidos</div>
-        <div style={{ fontSize: 12, marginTop: 4 }}>Intenta con el nombre completo</div>
-      </div>
-    ) : (
-      filtrar(partidos).map(p => renderPartido(p))
-    )}
-  </div>
-)}
+            {/* BUSQUEDA — siempre visible cuando hay texto */}
+            {busqueda.length > 1 && (
+              <div>
+                <div style={{ fontSize: 11, color: "#5a6a80", letterSpacing: 2, textTransform: "uppercase", marginBottom: 12 }}>
+                  {filtrar(partidos).length} resultado(s) para "{busqueda}"
+                </div>
+                {filtrar(partidos).length === 0 ? (
+                  <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
+                    <div style={{ fontSize: 32, marginBottom: 8 }}>🔍</div>
+                    <div>No se encontraron partidos</div>
+                    <div style={{ fontSize: 12, marginTop: 4 }}>Intenta con el nombre completo</div>
+                  </div>
+                ) : (
+                  filtrar(partidos).map(p => renderPartido(p))
+                )}
+              </div>
+            )}
