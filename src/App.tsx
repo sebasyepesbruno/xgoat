@@ -38,6 +38,22 @@ const BANDERAS = {
   "Ghana":"🇬🇭","Panamá":"🇵🇦","Inglaterra":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","Croacia":"🇭🇷",
 };
 
+const CODIGOS = {
+  "Argentina":"AR","Brasil":"BR","Francia":"FR","Noruega":"NO",
+  "Marruecos":"MA","Alemania":"DE","Suiza":"CH","Canadá":"CA",
+  "Países Bajos":"NL","España":"ES","Portugal":"PT","Colombia":"CO",
+  "Inglaterra":"EN","México":"MX","Estados Unidos":"US","Uruguay":"UY",
+  "Japón":"JP","Croacia":"HR","Escocia":"SC","Turquía":"TR",
+  "Túnez":"TN","Suecia":"SE","Ecuador":"EC","Costa de Marfil":"CI",
+  "Senegal":"SN","Francia":"FR","Bélgica":"BE","Egipto":"EG",
+  "Irán":"IR","Nueva Zelanda":"NZ","Irak":"IQ","Argelia":"DZ",
+  "Austria":"AT","Jordania":"JO","RD Congo":"CD","Uzbekistán":"UZ",
+  "Ghana":"GH","Panamá":"PA","Haití":"HT","Paraguay":"PY",
+  "Arabia Saudita":"SA","Uruguay":"UY","Catar":"QA","Sudáfrica":"ZA",
+  "Corea del Sur":"KR","República Checa":"CZ","Bosnia-Herzegovina":"BA",
+  "Australia":"AU","Cabo Verde":"CV","Curazao":"CW",
+};
+
 function horaCol(utcDate) {
   const dt = new Date(utcDate);
   dt.setHours(dt.getHours() - 5);
@@ -86,7 +102,6 @@ export default function App() {
         .then(r => r.json()),
     ])
     .then(([fdData, scData, oddsData]) => {
-      // Cuotas
       const cuotasMap = {};
       if (Array.isArray(oddsData)) {
         oddsData.forEach(p => {
@@ -102,7 +117,6 @@ export default function App() {
         });
       }
 
-      // Partidos
       const procesados = fdData.matches.map(m => {
         const col     = horaCol(m.utcDate);
         const localEN = m.homeTeam.name;
@@ -131,7 +145,6 @@ export default function App() {
       procesados.sort((a, b) => a.fecha.localeCompare(b.fecha) || a.hora.localeCompare(b.hora));
       setPartidos(procesados);
 
-      // Goleadores
       if (scData.scorers) {
         setGoleadores(scData.scorers.map(g => ({
           nombre:      g.player.name,
@@ -141,7 +154,6 @@ export default function App() {
           partidos:    g.playedMatches || 0,
         })));
       }
-
       setLoading(false);
     })
     .catch(() => setLoading(false));
@@ -206,9 +218,13 @@ export default function App() {
             {favoritos.includes(p.local) ? "GUARDADO" : "FAV"}
           </button>
         </div>
+
         <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", gap: 10, marginBottom: jugado ? 6 : 10 }}>
-          <div style={{ fontFamily: "Barlow Condensed", fontSize: 17, fontWeight: 700 }}>
-            {BANDERAS[p.local] || ""} {p.local}
+          <div>
+            <div style={{ fontFamily: "Barlow Condensed", fontSize: 17, fontWeight: 700 }}>
+              {BANDERAS[p.local] || ""} {p.local}
+            </div>
+            <div style={{ fontSize: 10, color: "#5a6a80" }}>({CODIGOS[p.local] || ""})</div>
           </div>
           {jugado ? (
             <div style={{ display: "flex", alignItems: "center", gap: 8, fontFamily: "Barlow Condensed", fontSize: 28, fontWeight: 800 }}>
@@ -219,10 +235,14 @@ export default function App() {
           ) : (
             <span style={{ color: "#1e2d45", fontFamily: "Barlow Condensed", fontSize: 18, fontWeight: 800 }}>VS</span>
           )}
-          <div style={{ textAlign: "right", fontFamily: "Barlow Condensed", fontSize: 17, fontWeight: 700 }}>
-            {p.visitante} {BANDERAS[p.visitante] || ""}
+          <div style={{ textAlign: "right" }}>
+            <div style={{ fontFamily: "Barlow Condensed", fontSize: 17, fontWeight: 700 }}>
+              {p.visitante} {BANDERAS[p.visitante] || ""}
+            </div>
+            <div style={{ fontSize: 10, color: "#5a6a80", textAlign: "right" }}>({CODIGOS[p.visitante] || ""})</div>
           </div>
         </div>
+
         {!jugado && p.oL > 0 && (
           <>
             <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, color: "#5a6a80", marginBottom: 3 }}>
@@ -261,7 +281,6 @@ export default function App() {
         input::placeholder { color: #3a4a5a; }
       `}</style>
 
-      {/* HEADER */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", borderBottom: "1px solid #1e2d45", background: "#080c14", position: "sticky", top: 0, zIndex: 100 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 34, height: 34, background: "#00e5ff", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 18, color: "#000" }}>X</div>
@@ -275,7 +294,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* BUSCADOR */}
       <div style={{ padding: "12px 20px", background: "#0d1320", borderBottom: "1px solid #1e2d45" }}>
         <div style={{ position: "relative" }}>
           <span style={{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", color: "#5a6a80" }}>🔍</span>
@@ -294,7 +312,6 @@ export default function App() {
         )}
       </div>
 
-      {/* STATS */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 1, background: "#1e2d45", borderBottom: "1px solid #1e2d45" }}>
         {[
           { label: "Total",     value: String(partidos.length), color: "#00e5ff" },
@@ -309,7 +326,6 @@ export default function App() {
         ))}
       </div>
 
-      {/* TABS */}
       <div style={{ display: "flex", borderBottom: "1px solid #1e2d45", background: "#0d1320", overflowX: "auto" }}>
         {TABS.map(t => (
           <button key={t.id} onClick={() => setTab(t.id)} style={{
@@ -324,16 +340,26 @@ export default function App() {
         ))}
       </div>
 
-      {/* CONTENT */}
       <div style={{ padding: 16, maxWidth: 800, margin: "0 auto" }}>
         {loading ? (
           <div style={{ textAlign: "center", padding: 60, color: "#5a6a80", fontSize: 18 }}>
             Cargando XGOAT...
           </div>
+        ) : busqueda.length > 1 ? (
+          <div>
+            <div style={{ fontSize: 11, color: "#5a6a80", letterSpacing: 2, textTransform: "uppercase", marginBottom: 12 }}>
+              {filtrar(partidos).length} resultado(s) para "{busqueda}"
+            </div>
+            {filtrar(partidos).length === 0 ? (
+              <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
+                <div style={{ fontSize: 32, marginBottom: 8 }}>🔍</div>
+                <div>No se encontraron partidos</div>
+              </div>
+            ) : filtrar(partidos).map(p => renderPartido(p))}
+          </div>
         ) : (
           <>
-            {/* HOY */}
-            {tab === "hoy" && busqueda.length < 2 && (
+            {tab === "hoy" && (
               deHoy.length > 0 ? deHoy.map(p => renderPartido(p))
               : <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
                   <div style={{ fontSize: 32, marginBottom: 8 }}>📅</div>
@@ -342,8 +368,7 @@ export default function App() {
                 </div>
             )}
 
-            {/* PROXIMOS */}
-            {tab === "proximos" && busqueda.length < 2 && Object.keys(porFecha).sort().map(fecha => (
+            {tab === "proximos" && Object.keys(porFecha).sort().map(fecha => (
               <div key={fecha} style={{ marginBottom: 8 }}>
                 <button onClick={() => toggleFecha(fecha)} style={{
                   width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -369,13 +394,11 @@ export default function App() {
               </div>
             ))}
 
-            {/* RESULTADOS */}
-            {tab === "resultados" && busqueda.length < 2 && (
+            {tab === "resultados" && (
               [...jugados].reverse().map(p => renderPartido(p))
             )}
 
-            {/* GOLEADORES */}
-            {tab === "goleadores" && busqueda.length < 2 && (
+            {tab === "goleadores" && (
               <div>
                 <div style={{ fontSize: 11, color: "#5a6a80", letterSpacing: 2, textTransform: "uppercase", marginBottom: 12 }}>
                   Top goleadores del Mundial 2026
@@ -387,27 +410,19 @@ export default function App() {
                         #{i+1}
                       </span>
                       <span style={{ fontSize: 28 }}>{BANDERAS[g.equipo] || "🏳"}</span>
+                      <span style={{ fontSize: 11, color: "#5a6a80", fontWeight: 700, fontFamily: "Barlow Condensed" }}>
+                        {CODIGOS[g.equipo] || ""}
+                      </span>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontFamily: "Barlow Condensed", fontSize: 17, fontWeight: 700 }}>{g.nombre}</div>
-                        <div style={{ fontSize: 11, color: "#5a6a80", marginTop: 2 }}>{g.equipo}</div>
-                        <div style={{ display: "flex", gap: 10, marginTop: 6 }}>
-                          <span style={{ fontSize: 10, color: "#5a6a80", background: "#111928", padding: "2px 8px", borderRadius: 3 }}>
-                            {g.partidos} partidos jugados
-                          </span>
-                        </div>
+                        <div style={{ fontSize: 11, color: "#5a6a80", marginTop: 2 }}>{g.equipo} · {g.partidos} partidos</div>
                       </div>
                       <div style={{ textAlign: "right" }}>
-                        <div style={{ fontFamily: "Barlow Condensed", fontSize: 26, fontWeight: 800, color: "#ff4d6d" }}>
-                          {g.goles} ⚽
-                        </div>
-                        {g.asistencias > 0 && (
-                          <div style={{ fontSize: 12, color: "#00e5ff", fontWeight: 700, marginTop: 2 }}>
-                            {g.asistencias} asistencias
-                          </div>
-                        )}
-                        {g.asistencias === 0 && (
-                          <div style={{ fontSize: 11, color: "#3a4a5a", marginTop: 2 }}>0 asistencias</div>
-                        )}
+                        <div style={{ fontFamily: "Barlow Condensed", fontSize: 26, fontWeight: 800, color: "#ff4d6d" }}>{g.goles} ⚽</div>
+                        {g.asistencias > 0
+                          ? <div style={{ fontSize: 12, color: "#00e5ff", fontWeight: 700, marginTop: 2 }}>{g.asistencias} asistencias</div>
+                          : <div style={{ fontSize: 11, color: "#3a4a5a", marginTop: 2 }}>0 asistencias</div>
+                        }
                       </div>
                     </div>
                     <div style={{ marginTop: 10 }}>
@@ -420,8 +435,7 @@ export default function App() {
               </div>
             )}
 
-            {/* FAVORITOS */}
-            {tab === "favoritos" && busqueda.length < 2 && (
+            {tab === "favoritos" && (
               favList.length > 0 ? favList.map(p => renderPartido(p))
               : <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
                   <div style={{ fontSize: 32, marginBottom: 8 }}>★</div>
@@ -429,21 +443,9 @@ export default function App() {
                   <div style={{ fontSize: 12, marginTop: 4 }}>Toca FAV en cualquier partido</div>
                 </div>
             )}
-
-            {/* BUSQUEDA — siempre visible cuando hay texto */}
-            {busqueda.length > 1 && (
-              <div>
-                <div style={{ fontSize: 11, color: "#5a6a80", letterSpacing: 2, textTransform: "uppercase", marginBottom: 12 }}>
-                  {filtrar(partidos).length} resultado(s) para "{busqueda}"
-                </div>
-                {filtrar(partidos).length === 0 ? (
-                  <div style={{ textAlign: "center", padding: 40, color: "#5a6a80" }}>
-                    <div style={{ fontSize: 32, marginBottom: 8 }}>🔍</div>
-                    <div>No se encontraron partidos</div>
-                    <div style={{ fontSize: 12, marginTop: 4 }}>Intenta con el nombre completo</div>
-                  </div>
-                ) : (
-                  filtrar(partidos).map(p => renderPartido(p))
-                )}
-              </div>
-            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
