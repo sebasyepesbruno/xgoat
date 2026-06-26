@@ -385,7 +385,26 @@ export default function App() {
                     <span style={{ fontFamily: "Barlow Condensed", fontSize: 22, fontWeight: 800, color: i === 0 ? "#ffe600" : i === 1 ? "#c0c0c0" : i === 2 ? "#cd7f32" : "#5a6a80", textAlign: "center" }}>
                       #{i+1}
                     </span>
-                    <span style={{ fontSize: 22 }}>{BANDERAS[g.equipo] || "🏳"}</span>
+                    <span style={{ fontSize: 22 }}>{BANDERAS[g.equipo] || "🏳️"}</span>
+                    <span style={{ fontSize: 11, color: "#5a6a80", fontWeight: 700, fontFamily: "Barlow Condensed" }}>
+                      {g.equipo === "Argentina" ? "AR" :
+                      g.equipo === "Brasil" ? "BR" :
+                      g.equipo === "Francia" ? "FR" :
+                      g.equipo === "Noruega" ? "NO" :
+                      g.equipo === "Marruecos" ? "MA" :
+                      g.equipo === "Alemania" ? "DE" :
+                      g.equipo === "Suiza" ? "CH" :
+                      g.equipo === "Canadá" ? "CA" :
+                      g.equipo === "Países Bajos" ? "NL" :
+                      g.equipo === "España" ? "ES" :
+                      g.equipo === "Portugal" ? "PT" :
+                      g.equipo === "Colombia" ? "CO" :
+                      g.equipo === "Inglaterra" ? "EN" :
+                      g.equipo === "México" ? "MX" :
+                      g.equipo === "Estados Unidos" ? "US" :
+                      g.equipo === "Uruguay" ? "UY" :
+                      g.equipo === "Japón" ? "JP" : ""}
+                    </span>
                     <div>
                       <div style={{ fontFamily: "Barlow Condensed", fontSize: 16, fontWeight: 700 }}>{g.nombre}</div>
                       <div style={{ fontSize: 11, color: "#5a6a80" }}>{g.equipo} · {g.partidos} partidos</div>
