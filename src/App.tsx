@@ -79,10 +79,10 @@ const GRUPOS_DATA = {
     { bandera:"🇹🇷", nombre:"Turquía",         pj:3,g:1,e:0,p:2,gf:2,gc:5,dg:"-3",pts:3 },
   ],
   E: [
-    { bandera:"🇩🇪", nombre:"Alemania",        pj:3,g:3,e:0,p:0,gf:13,gc:3,dg:"+10",pts:9 },
-    { bandera:"🇨🇮", nombre:"Costa de Marfil", pj:3,g:1,e:1,p:1,gf:4,gc:5,dg:"-1",pts:4 },
-    { bandera:"🇪🇨", nombre:"Ecuador",         pj:3,g:1,e:0,p:2,gf:3,gc:5,dg:"-2",pts:3 },
-    { bandera:"🇨🇼", nombre:"Curazao",         pj:3,g:0,e:1,p:2,gf:3,gc:10,dg:"-7",pts:1 },
+    { bandera:"🇩🇪", nombre:"Alemania",        pj:3,g:2,e:0,p:1,gf:10,gc:4,dg:"+6",pts:6 },
+    { bandera:"🇨🇮", nombre:"Costa de Marfil", pj:3,g:2,e:0,p:1,gf:4,gc:5,dg:"-1",pts:6 },
+    { bandera:"🇪🇨", nombre:"Ecuador",         pj:3,g:1,e:1,p:1,gf:3,gc:5,dg:"-2",pts:4 },
+    { bandera:"🇨🇼", nombre:"Curazao",         pj:3,g:0,e:1,p:2,gf:1,gc:9,dg:"-7",pts:1 },
   ],
   F: [
     { bandera:"🇳🇱", nombre:"Países Bajos",   pj:3,g:1,e:2,p:0,gf:6,gc:4,dg:"+2",pts:5 },
