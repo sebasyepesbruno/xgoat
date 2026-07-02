@@ -90,13 +90,13 @@ const GRUPOS_DATA = {
     { bandera:"🇸🇪", nombre:"Suecia",          pj:3,g:1,e:0,p:2,gf:3,gc:4,dg:"-1",pts:3 },
     { bandera:"🇹🇳", nombre:"Túnez",           pj:3,g:0,e:2,p:1,gf:2,gc:4,dg:"-2",pts:2 },
   ],
-  G: [
+  H: [
     { bandera:"🇪🇸", nombre:"España",          pj:3,g:3,e:0,p:0,gf:9,gc:1,dg:"+8",pts:9 },
     { bandera:"🇺🇾", nombre:"Uruguay",         pj:3,g:2,e:0,p:1,gf:5,gc:3,dg:"+2",pts:6 },
     { bandera:"🇸🇦", nombre:"Arabia Saudita",  pj:3,g:0,e:1,p:2,gf:2,gc:7,dg:"-5",pts:1 },
     { bandera:"🇨🇻", nombre:"Cabo Verde",      pj:3,g:0,e:1,p:2,gf:1,gc:6,dg:"-5",pts:1 },
   ],
-  H: [
+  G: [
     { bandera:"🇧🇪", nombre:"Bélgica",         pj:3,g:2,e:1,p:0,gf:6,gc:2,dg:"+4",pts:7 },
     { bandera:"🇮🇷", nombre:"Irán",            pj:3,g:1,e:1,p:1,gf:3,gc:3,dg:"0", pts:4 },
     { bandera:"🇳🇿", nombre:"Nueva Zelanda",   pj:3,g:1,e:0,p:2,gf:2,gc:4,dg:"-2",pts:3 },
